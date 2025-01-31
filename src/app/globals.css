@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@theme {
+  --color-red: #ff0000;
+  --color-primary: #0e1326;
+}
+
+:root {
+  --background: #0e1326;
+  --foreground: #ffffff;
+}
+
+@layer base {
+  body {
+    background: var(--background);
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.loader {
+  border: 3px solid white;
+  border-top: 3px solid red;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
