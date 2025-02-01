@@ -9,7 +9,7 @@ const ebGaramond = EB_Garamond({
 
 export const metadata: Metadata = {
   title: "Shinigami AI",
-  description: "Uji coba Shinigami AI",
+  description: "The presence of this AI Shinigami is to carry out the Great Task, nothing else :v",
   icons: {
     icon: "/icons/shinigami_ai_logo.svg",
   },

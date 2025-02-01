@@ -20,13 +20,16 @@ export async function POST(req: Request) {
     }
 
     const reply = await groq.chat.completions.create({
-      messages: [{ role: "user", content: body.content }],
       model: "llama3-8b-8192",
+      messages: [{ role: "user", content: body.content }],
     });
 
     return NextResponse.json({ response: reply.choices[0].message.content });
-  } catch (error) {
-    console.error("Groq API Error:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Groq API Error:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

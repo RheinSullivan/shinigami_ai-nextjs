@@ -8,18 +8,10 @@
   --background: #0e1326;
   --foreground: #ffffff;
 }
-
-@layer base {
-  body {
-    background: var(--background);
-  }
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
 }
-
 .loader {
   border: 3px solid white;
   border-top: 3px solid red;

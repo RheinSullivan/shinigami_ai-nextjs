@@ -1,3 +1,4 @@
+
 export const requestGroq = async (content: string): Promise<string> => {
   try {
     const response = await fetch("/api", {
@@ -15,6 +16,6 @@ export const requestGroq = async (content: string): Promise<string> => {
     return data.response;
   } catch (error) {
     console.error("Error fetching Groq API:", error);
-    return "Maaf, terjadi kesalahan.";
+    return "Something went wrong, try again in the afterlife!";
   }
 };

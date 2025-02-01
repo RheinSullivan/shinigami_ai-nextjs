@@ -6,10 +6,11 @@ import ShinigamiLogo from "/public/icons/shinigami_ai_logo.svg";
 import ToastProvider from "@/component/react_toaster/toaster";
 import { showSuccessToast, showErrorToast } from "@/component/react_toaster/toasterHandler";
 import SyntaxHighlightComponent from "@/component/syntax_highlighter/highlight";
+import { MdOutlineStar } from "react-icons/md";
 
 export default function Home() {
   const [content, setContent] = useState("");
-  const [data, setData] = useState("");
+  const [history, setHistory] = useState<{ question: string; answer: string }[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
@@ -18,7 +19,7 @@ export default function Home() {
     setLoading(true);
     try {
       const groqAI = await requestGroq(content);
-      setData(groqAI ?? "");
+      setHistory((prev) => [...prev, { question: content, answer: groqAI ?? "" }]);
       showSuccessToast();
       setContent("");
     } catch {
@@ -36,25 +37,44 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col justify-center items-center  max-w-xl min-h-[100vh] w-full mx-auto">
+    <main className="flex flex-col justify-center items-center max-w-[680px] min-h-[100vh] w-full mx-auto">
+      {/* Toaster Notification */}
       <ToastProvider />
 
-      <div className="flex space-x-5 items-center fixed top-16">
-        <Image className="size-20" src={ShinigamiLogo} alt="Logo Shinigami AI" />
-        <div className="border py-8" />
-        <div className="flex-col">
-          <h1 className="text-3xl font-bold text-red">Shinigami AI</h1>
-          <p className="text-lg italic">Rhein Sullivan</p>
-        </div>
+      {/* Header */}
+      <div className="flex items-center justify-between w-full max-w-[680px] fixed top-10 px-4">
+        <figure className="flex items-center space-x-5">
+          <Image className="size-20" src={ShinigamiLogo} alt="Logo Shinigami AI" />
+          <div className="border-l-2 border-gray-700 py-8" />
+          <figcaption className="flex flex-col">
+            <h1 className="text-3xl font-bold text-red">Shinigami AI</h1>
+            <p className="text-lg italic text-gray-500">Rhein Sullivan</p>
+          </figcaption>
+        </figure>
+        <a href="https://github.com/RheinSullivan/shinigami_ai-nextjs" className="flex items-center gap-x-1 py-2 px-4 rounded-md hover:bg-red bg-blue-800">
+          <MdOutlineStar className="text-yellow-300 text-2xl" /> Give me Star!
+        </a>
       </div>
 
-      <div className="mx-auto my-5 max-w-xl w-full">
-        <SyntaxHighlightComponent data={data} />
+      {/* Message History */}
+      <div className="w-full max-w-[680px] -mt-20 space-y-5 p-4">
+        {history.map((item, index) => (
+          <div key={index} className="flex flex-col items-end">
+            <div className="flex self-end gap-4 max-w-[80%]">
+              <span className="bg-gray-500 text-gray-300 p-3 rounded-lg">{item.question}</span>
+              <Image className="size-10 bg-white rounded-full" src={ShinigamiLogo} alt="Logo" />
+            </div>
+            <div className="mt-2 self-start">
+              <SyntaxHighlightComponent data={item.answer} />
+            </div>
+          </div>
+        ))}
       </div>
 
+      {/* Form & Button */}
       <form onSubmit={(e) => e.preventDefault()} className="flex w-full max-w-2xl justify-center fixed bottom-36">
         <input
-          placeholder="Message Shinigami AI"
+          placeholder="Message Shinigami AI..."
           type="text"
           className="bg-white py-3 px-4 rounded-l-md text-md text-black outline-none flex-1"
           id="content"
@@ -67,8 +87,13 @@ export default function Home() {
         </button>
       </form>
 
-      <footer className="text-center text-gray-400 pt-4 mt-10 border-t border-gray-700 fixed w-[50%] bottom-12">
-        Copyright © 2024 <span className="text-white font-semibold italic">Rhein Sullivan</span>. All rights reserved.
+      {/* Footer */}
+      <footer className="text-center text-gray-500 pt-4 mt-10 border-t-2 border-gray-700 fixed w-[50%] bottom-12">
+        Copyright © 2025{" "}
+        <a href="https://www.rheinsullivan.web.id/" className="text-white font-semibold italic">
+          Rhein Sullivan
+        </a>
+        . All rights reserved.
       </footer>
     </main>
   );
