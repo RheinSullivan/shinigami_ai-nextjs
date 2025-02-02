@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { requestGroq } from "@/utils/groq";
 import Image from "next/image";
+import UsersIcons from "/public/users.svg";
 import ShinigamiLogo from "/public/icons/shinigami_ai_logo.svg";
 import ToastProvider from "@/component/react_toaster/toaster";
 import { showSuccessToast, showErrorToast } from "@/component/react_toaster/toasterHandler";
@@ -62,7 +63,7 @@ export default function Home() {
           <div key={index} className="flex flex-col overscroll-y-auto items-end">
             <div className="flex self-end gap-4 max-w-[80%]">
               <span className="bg-gray-500 text-gray-300 p-3 rounded-lg">{item.question}</span>
-              <Image className="size-9 xl:size-10 bg-white rounded-full" src={ShinigamiLogo} alt="Logo" />
+              <Image className="size-9 xl:size-10 bg-white rounded-full" src={UsersIcons} alt="Logo" />
             </div>
             <SyntaxHighlightComponent data={item.answer} />
           </div>
