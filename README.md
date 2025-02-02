@@ -4,6 +4,24 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+## .env.example
+Change the “.env.example” component file to “.env” and fill it in with the API Key that you created on the official website [Groq](https://console.groq.com/).
+``` bash
+NEXT_PUBLIC_GROQ_API_KEY=your_api
+```
+
+## Install Dependencies
+``` bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+## Run The Project
 ```bash
 npm run dev
 # or
