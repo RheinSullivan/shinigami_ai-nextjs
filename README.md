@@ -7,7 +7,7 @@ First, run the development server:
 ## .env.example
 Change the “.env.example” component file to “.env” and fill it in with the API Key that you created on the official website [Groq](https://console.groq.com/).
 ``` bash
-NEXT_PUBLIC_GROQ_API_KEY=your_api
+GROQ_API_KEY=your_api
 ```
 
 ## Install Dependencies
