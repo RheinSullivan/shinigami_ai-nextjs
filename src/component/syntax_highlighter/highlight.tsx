@@ -12,9 +12,9 @@ export default function SyntaxHighlightComponent({ data }: Props) {
   if (!data) return null;
 
   return (
-    <div className="max-h-80 w-full overflow-y-auto flex items-start gap-4 ">
-      <Image className="size-10 bg-white rounded-full" src={ShinigamiLogo} alt="Logo Shinigami AI" />
-      <SyntaxHighlight language="swift" wrapLongLines={true} style={a11yLight} className="rounded-lg p-2">
+    <div className="max-h-80 w-full flex items-start gap-4 self-start mt-5">
+      <Image className="size-9 xl:size-10 bg-white rounded-full" src={ShinigamiLogo} alt="Logo Shinigami AI" />
+      <SyntaxHighlight language="swift" wrapLongLines={true} style={a11yLight} className="overflow-y-auto rounded-lg p-5 text-sm lg:text-base">
         {data}
       </SyntaxHighlight>
     </div>
